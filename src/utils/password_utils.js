@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt'
+import { environement } from '../config'
 
+const { salt_rounds } = environement
 export class PasswordUtils {
-    static saltRound = process.env.SALT_ROUNDS
+    static saltRound = salt_rounds
 
     static async hashPassword(password) {
         return bcrypt.hash(password, this.saltRound)

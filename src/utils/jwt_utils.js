@@ -1,14 +1,13 @@
 import jwt from 'jsonwebtoken'
-import { SignOptions, JwtPayload } from 'jsonwebtoken'
+import { environment } from '../config'
+
+const { jwt_auth_token, jwt_refresh_token, jwt_expires_in } = environment
 
 export class JWTUtils {
-    static secret = process.env.JWT_SECRET_AUTH_TOKEN
-    static anotherSecret = process.env.JWT_SECRET_REFRESH_TOKEN
+    static secret = jwt_auth_token
+    static anotherSecret = jwt_refresh_token
 
-    static generateAuthToken(
-        payload,
-        options = { expiresIn: process.env.JWT_EXPIRES_IN }
-    ) {
+    static generateAuthToken(payload, options = { expiresIn: jwt_expires_in }) {
         return jwt.sign(payload, this.secret, options)
     }
 
