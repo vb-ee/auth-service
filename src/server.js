@@ -1,5 +1,5 @@
-import { Database } from './database'
-import config from './config/config'
+import Database from './database/database.js'
+import config from './config/config.js'
 
 const { node_env } = config.environment
 

@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 
-export class Database {
+export default class Database {
     constructor(environment, dbConfig) {
         this.environment = environment
         this.dbConfig = dbConfig
