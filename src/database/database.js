@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 
-export default class Database {
+export class Database {
     constructor(environment, dbConfig) {
         this.environment = environment
         this.dbConfig = dbConfig
@@ -24,6 +24,17 @@ export default class Database {
 
         await this.connection.sync({ force: this.isTestEnv, logging: false })
         if (!this.isTestEnv) console.log('Models synchronized succesfully!')
+    }
+
+    async sync() {
+        await this.connection.sync({
+            force: this.isTestEnvironment,
+            logging: false
+        })
+
+        if (!this.isTestEnvironment) {
+            console.log('Models synchronized successfully')
+        }
     }
 
     async disconnect() {
