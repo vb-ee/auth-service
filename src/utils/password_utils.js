@@ -2,14 +2,11 @@ import bcrypt from 'bcrypt'
 import { environement } from '../config'
 
 const { salt_rounds } = environement
-export class PasswordUtils {
-    static saltRound = salt_rounds
 
-    static async hashPassword(password) {
-        return bcrypt.hash(password, this.saltRound)
-    }
+export const hashPassword = (password) => {
+    return bcrypt.hash(password, salt_rounds)
+}
 
-    static async comparePasswords(password, hashedPassword) {
-        return bcrypt.compare(password, hashedPassword)
-    }
+export const comparePasswords = (password, hashedPassword) => {
+    return bcrypt.compare(password, hashedPassword)
 }
