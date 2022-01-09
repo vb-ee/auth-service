@@ -1,5 +1,6 @@
 import { TestHelpers } from '../test_helpers'
 import { User } from '../../src/models'
+import { hashPassword } from '../../src/utils'
 
 describe('User', () => {
     beforeAll(async () => {

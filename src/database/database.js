@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize'
-
 export class Database {
     constructor(environment, dbConfig) {
         this.environment = environment
@@ -14,7 +13,8 @@ export class Database {
         this.connection = new Sequelize(database, username, password, {
             host: host,
             dialect: dialect,
-            logging: this.isTestEnv ? false : console.log
+            port: port,
+            logging: this.isTestEnv ? false : console.log,
         })
 
         await this.connection.authenticate()
@@ -24,17 +24,6 @@ export class Database {
 
         await this.connection.sync({ force: this.isTestEnv, logging: false })
         if (!this.isTestEnv) console.log('Models synchronized succesfully!')
-    }
-
-    async sync() {
-        await this.connection.sync({
-            force: this.isTestEnvironment,
-            logging: false
-        })
-
-        if (!this.isTestEnvironment) {
-            console.log('Models synchronized successfully')
-        }
     }
 
     async disconnect() {
