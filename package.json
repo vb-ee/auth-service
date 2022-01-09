@@ -4,12 +4,24 @@
     "description": "",
     "main": "index.js",
     "type": "commonjs",
+    "nodemonConfig": {
+        "exec": "npm run dev",
+        "watch": [
+            "src/*"
+        ],
+        "ignore": [
+            "**/__tests__/**",
+            "*.test.js",
+            "*.spec.js"
+        ]
+    },
     "scripts": {
-        "server": "nodemon dist-src/server.js",
+        "server": "node dist-src/server.js",
         "transpile": "babel src --out-dir dist-src",
         "clean": "rimraf dist-server",
         "build": "npm-run-all clean transpile",
         "dev": "npm-run-all build server",
+        "watch:dev": "nodemon",
         "test": "jest --runInBand",
         "test:watch": "npm test -- --watch",
         "debug": "npm run dev -- --inspect"

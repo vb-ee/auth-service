@@ -1,19 +1,16 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
-import { User } from '.'
-import { sequelize } from '../config/config'
+import { sequelize } from '../database'
 
 export class Role extends Model {}
 
 Role.init(
     {
         role: {
-            type: DataTypes.STRING
-        }
+            type: DataTypes.STRING,
+        },
     },
     {
         sequelize,
-        tableName: 'roles'
+        tableName: 'roles',
     }
 )
-
-Role.belongsTo(User)

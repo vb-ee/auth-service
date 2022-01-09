@@ -1,19 +1,24 @@
+import { Sequelize } from 'sequelize'
 import { Database } from '../src/database/database'
 import { config } from '../src/config/config'
 
-let db
+let db = new Database('test', config)
+
+const { username, password, host, port, database, dialect } = db.getConfig()
+
+export const sequelize = new Sequelize(database, username, password, {
+    host: host,
+    dialect: dialect,
+    port: port,
+    logging: false,
+})
 
 export class TestHelpers {
     static async startDb() {
-        db = new Database('test', config)
-        await db.connect()
+        await db.connect(sequelize)
     }
 
     static async stopDb() {
-        await db.disconnect()
-    }
-
-    static async syncDb() {
-        await db.sync()
+        await db.disconnect(sequelize)
     }
 }

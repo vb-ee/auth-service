@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt'
-import { environement } from '../config'
+import { config } from '../config/config'
 
-const { salt_rounds } = environement
+const { salt_rounds } = config.environment
 
 export const hashPassword = (password) => {
-    return bcrypt.hash(password, salt_rounds)
+    return bcrypt.hash(password, parseInt(salt_rounds))
 }
 
 export const comparePasswords = (password, hashedPassword) => {

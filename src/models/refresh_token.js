@@ -1,19 +1,16 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
-import { User } from '.'
-import { sequelize } from '../config/config'
+import { sequelize } from '../database'
 
 export class RefreshToken extends Model {}
 
 RefreshToken.init(
     {
         token: {
-            type: DataTypes.TEXT
-        }
+            type: DataTypes.TEXT,
+        },
     },
     {
         sequelize,
-        tableName: 'refreshTokens'
+        tableName: 'refreshTokens',
     }
 )
-
-RefreshToken.belongsTo(User)

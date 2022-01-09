@@ -1,6 +1,8 @@
 import express from 'express'
 import morgan from 'morgan'
 import { config } from './config/config'
+import { errorMiddleware } from './middlewares/error_handler'
+import { router } from './controllers'
 
 const { node_env, port } = config.environment
 
@@ -13,7 +15,10 @@ export class App {
         this.setRoutes()
     }
 
-    setRoutes() {}
+    setRoutes() {
+        this.app.use('/', router)
+        this.app.use(errorMiddleware)
+    }
 
     getApp() {
         return this.app
