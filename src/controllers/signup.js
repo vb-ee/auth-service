@@ -9,7 +9,7 @@ router.post(
     '/signup',
     asyncWrapper(async (req, res) => {
         const { email, password, roles } = req.body
-        const user = await User.findOne({ where: email })
+        const user = await User.findOne({ where: { email } })
 
         if (user) {
             return res
@@ -36,7 +36,7 @@ router.post(
             return res.send({
                 success: true,
                 message: 'User successfully created',
-                data: { accessToken, refreshToken },
+                data: { accessToken, refreshToken }
             })
         } catch (error) {
             console.error('Error registering the user: \n', error.stack)

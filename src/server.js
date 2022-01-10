@@ -1,15 +1,15 @@
 import { App } from './app'
-import { db, sequelize } from './database'
+import { db } from './database'
 
 const app = new App()
 
-const connectionTest = async () => {
+const connection = async () => {
     try {
-        await db.connect(sequelize)
+        await db.connect()
         app.listen()
     } catch (error) {
         console.error("Couldn't connect to the database", error.stack)
     }
 }
 
-connectionTest()
+connection()

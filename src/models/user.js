@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize'
 import { hashPassword } from '../utils'
 import { Role } from './role'
 import { RefreshToken } from './refresh_token'
-import { sequelize } from '../database'
+import { sequelize, testSequelize } from '../database'
 
 export class User extends Model {}
 
@@ -14,40 +14,40 @@ User.init(
             unique: true,
             validate: {
                 isEmail: {
-                    msg: 'Not a valid email address',
-                },
-            },
+                    msg: 'Not a valid email address'
+                }
+            }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         username: {
             type: DataTypes.STRING,
-            unique: true,
+            unique: true
         },
         firstName: {
             type: DataTypes.STRING,
             validate: {
                 len: {
                     args: [0, 50],
-                    msg: 'First name has too many characters',
-                },
-            },
+                    msg: 'First name has too many characters'
+                }
+            }
         },
         lastName: {
             type: DataTypes.STRING,
             validate: {
                 len: {
                     args: [0, 50],
-                    msg: 'Last name has too many characters',
-                },
-            },
-        },
+                    msg: 'Last name has too many characters'
+                }
+            }
+        }
     },
     {
         sequelize,
-        tableName: 'users',
+        tableName: 'users'
     }
 )
 
