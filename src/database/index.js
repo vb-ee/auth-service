@@ -1,10 +1,13 @@
-import { Database } from './database'
-import { config } from '../config/config'
+export * from './database'
+import { getUser, getRefreshToken, getRole } from '../models'
 
-const { node_env } = config.environment
+const models = {}
 
-export const db = new Database(node_env, config)
-export const testDb = new Database('test', config)
-
-export const sequelize = db.getSequelize()
-export const testSequelize = testDb.getSequelize()
+export const registerModels = (sequelize) => {
+    models = {
+        User: getUser(sequelize),
+        Role: getRole(sequelize),
+        RefreshToken: getRefreshToken(sequelize),
+        sequelize: sequelize
+    }
+}

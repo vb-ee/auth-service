@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize'
+import { registerModels } from '.'
 export class Database {
     constructor(environment, dbConfig) {
         this.environment = environment
@@ -6,25 +7,25 @@ export class Database {
         this.isTestEnv = this.environment === 'test'
     }
 
-    getSequelize() {
+    async connect() {
         const { username, password, host, port, database, dialect } =
             this.dbConfig[this.environment]
 
-        return new Sequelize(database, username, password, {
+        this.connection = new Sequelize(database, username, password, {
             host: host,
             dialect: dialect,
             port: port,
             logging: this.isTestEnv ? false : console.log
         })
-    }
 
-    async connect() {
-        await this.getSequelize().authenticate()
+        await this.connection.authenticate()
 
         if (!this.isTestEnv)
             console.log('Successfully connected to the database')
 
-        await this.getSequelize().sync({
+        registerModels(this.connection)
+
+        await this.connection.sync({
             force: this.isTestEnv,
             logging: false
         })
@@ -33,6 +34,6 @@ export class Database {
     }
 
     async disconnect() {
-        await this.getSequelize().close()
+        await this.connection.close()
     }
 }

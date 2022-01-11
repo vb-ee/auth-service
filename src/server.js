@@ -1,5 +1,8 @@
 import { App } from './app'
-import { db } from './database'
+import { config } from './config'
+import { Database } from './database'
+
+const db = new Database(config.environment['node_env'], config)
 
 const app = new App()
 
