@@ -1,8 +1,11 @@
-import { Sequelize, DataTypes, Model } from 'sequelize'
-import { sequelize, testSequelize } from '../database'
+import { DataTypes, Model } from 'sequelize'
 
 export const getRefreshToken = (sequelize) => {
-    class RefreshToken extends Model {}
+    class RefreshToken extends Model {
+        static associate(models) {
+            RefreshToken.belongsTo(models['User'])
+        }
+    }
 
     RefreshToken.init(
         {

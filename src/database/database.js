@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-import { registerModels } from '.'
+import { registerModels } from '../models'
 export class Database {
     constructor(environment, dbConfig) {
         this.environment = environment

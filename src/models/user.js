@@ -1,10 +1,13 @@
 import { DataTypes, Model } from 'sequelize'
 import { hashPassword } from '../utils'
-import { Role } from './role'
-import { RefreshToken } from './refresh_token'
 
 export const getUser = (sequelize) => {
-    class User extends Model {}
+    class User extends Model {
+        static associate(models) {
+            User.hasMany(models['Role'])
+            User.hasOne(models['RefreshToken'])
+        }
+    }
 
     User.init(
         {
@@ -55,11 +58,6 @@ export const getUser = (sequelize) => {
         const hashedPassword = await hashPassword(user.password)
         user.password = hashedPassword
     })
-
-    User.hasMany(Role)
-    User.hasOne(RefreshToken)
-    Role.belongsTo(User)
-    RefreshToken.belongsTo(User)
 
     return User
 }

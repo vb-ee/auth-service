@@ -1,8 +1,11 @@
-import { Sequelize, DataTypes, Model } from 'sequelize'
-import { sequelize, testSequelize } from '../database'
+import { DataTypes, Model } from 'sequelize'
 
 export const getRole = (sequelize) => {
-    class Role extends Model {}
+    class Role extends Model {
+        static associate(models) {
+            Role.belongsTo(models['User'])
+        }
+    }
 
     Role.init(
         {

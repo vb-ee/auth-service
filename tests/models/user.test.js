@@ -1,5 +1,5 @@
 import { TestHelpers } from '../test_helpers'
-import { User } from '../../src/models'
+import { models } from '../../src/models'
 import { comparePasswords, hashPassword } from '../../src/utils'
 
 describe('User', () => {
@@ -41,6 +41,7 @@ describe('User', () => {
 
     describe('hooks', () => {
         it('should create the user with hashed password', async () => {
+            const { User } = models
             const email = 'test@example.com'
             const password = 'Test132#'
             await User.create({ email, password })
