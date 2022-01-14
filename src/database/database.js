@@ -25,6 +25,10 @@ export class Database {
 
         registerModels(this.connection)
 
+        await this.sync()
+    }
+
+    async sync() {
         await this.connection.sync({
             force: this.isTestEnv,
             logging: false

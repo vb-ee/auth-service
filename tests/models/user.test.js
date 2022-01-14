@@ -40,6 +40,10 @@ describe('User', () => {
     })
 
     describe('hooks', () => {
+        beforeEach(async () => {
+            await TestHelpers.syncDb()
+        })
+
         it('should create the user with hashed password', async () => {
             const { User } = models
             const email = 'test@example.com'

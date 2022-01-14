@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { User, Role } from '../models'
+import { models } from '../models'
 import { JwtUtils } from '../utils'
 import { asyncWrapper } from '../utils'
 
@@ -9,6 +9,8 @@ router.post(
     '/signup',
     asyncWrapper(async (req, res) => {
         const { email, password, roles } = req.body
+        const { User, Role } = models
+
         const user = await User.findOne({ where: { email } })
 
         if (user) {

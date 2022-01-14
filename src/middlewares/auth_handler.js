@@ -20,13 +20,13 @@ export const authHandler = (tokenType = 'accessToken') => {
             } catch (error) {
                 res.status(401).send({
                     success: false,
-                    message: 'Invalid token',
+                    message: 'Invalid token'
                 })
             }
         } else {
             return res.status(401).send({
                 success: false,
-                message: 'Authorization header not found',
+                message: 'Authorization header not found'
             })
         }
     }
