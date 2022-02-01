@@ -15,6 +15,14 @@ export class Database {
             host: host,
             dialect: dialect,
             port: port,
+
+            pool: {
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            },
+
             logging: this.isTestEnv ? false : console.log
         })
 

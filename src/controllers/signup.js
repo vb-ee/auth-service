@@ -4,13 +4,12 @@ import { JwtUtils } from '../utils'
 import { asyncWrapper } from '../utils'
 
 const router = Router()
+const { User, Role } = models
 
 router.post(
     '/signup',
     asyncWrapper(async (req, res) => {
         const { email, password, roles } = req.body
-        const { User, Role } = models
-
         const user = await User.findOne({ where: { email } })
 
         if (user) {

@@ -1,11 +1,11 @@
 import { config } from '../src/config'
 import { Database } from '../src/database'
-import { App } from '../src/app'
 
 const testDb = new Database('test', config)
 export class TestHelpers {
     static async startDb() {
         await testDb.connect()
+        return testDb
     }
 
     static async syncDb() {
@@ -17,6 +17,7 @@ export class TestHelpers {
     }
 
     static getApp() {
+        const App = require('../src/app').default
         return new App().getApp()
     }
 }

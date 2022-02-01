@@ -6,7 +6,7 @@ import { router } from './controllers'
 
 const { node_env, port } = config.environment
 
-export class App {
+export default class App {
     constructor() {
         this.app = express()
         this.app.use(morgan('dev', { skip: (req, res) => node_env === 'test' }))
