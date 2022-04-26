@@ -2,7 +2,7 @@ import request from 'supertest'
 import { TestHelpers } from '../test_helpers'
 import { models } from '../../src/models'
 
-describe('signup', () => {
+describe('login', () => {
     let app
     let newUser
 
@@ -19,7 +19,7 @@ describe('signup', () => {
         await TestHelpers.syncDb()
         newUser = await TestHelpers.signupNewUser({
             email: 'test@example.com',
-            password: 'Test123#'
+            password: 'Test123#',
         })
     })
 
@@ -31,7 +31,7 @@ describe('signup', () => {
         const { refreshToken } = response.body.data
         const { RefreshToken } = models
         const savedRefreshToken = await RefreshToken.findOne({
-            where: { token: refreshToken }
+            where: { token: refreshToken },
         })
         expect(savedRefreshToken).toBeDefined()
         expect(savedRefreshToken.token).toEqual(refreshToken)

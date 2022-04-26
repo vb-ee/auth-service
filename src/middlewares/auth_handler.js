@@ -7,26 +7,26 @@ export const authHandler = (tokenType = 'accessToken') => {
         if (authHeader) {
             const token = authHeader.split(' ')[1]
             try {
-                let user
+                let jwt
                 switch (tokenType) {
                     case 'accessToken':
                     default:
-                        user = JwtUtils.verifyAccessToken(token)
+                        jwt = JwtUtils.verifyAccessToken(token)
                     case 'refreshToken':
-                        user = JwtUtils.verifyRefreshToken(token)
+                        jwt = JwtUtils.verifyRefreshToken(token)
                 }
-                req.body.user = user
+                req.body.jwt = jwt
                 next()
             } catch (error) {
                 res.status(401).send({
                     success: false,
-                    message: 'Invalid token'
+                    message: 'Invalid token',
                 })
             }
         } else {
             return res.status(401).send({
                 success: false,
-                message: 'Authorization header not found'
+                message: 'Authorization header not found',
             })
         }
     }
