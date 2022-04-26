@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize'
 import { registerModels } from '../models'
+import cls from 'cls-hooked'
 export class Database {
     constructor(environment, dbConfig) {
         this.environment = environment
@@ -10,6 +11,9 @@ export class Database {
     async connect() {
         const { username, password, host, port, database, dialect } =
             this.dbConfig[this.environment]
+
+        const namespace = cls.createNamespace('transaction-namespace')
+        Sequelize.useCLS(namespace)
 
         this.connection = new Sequelize(database, username, password, {
             host: host,

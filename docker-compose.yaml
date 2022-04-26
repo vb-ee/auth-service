@@ -2,7 +2,7 @@ version: '3'
 services:
     postgres:
         image: postgres:14
-        container_name: auth-sequelize
+        container_name: auth
         env_file:
             - .env
         environment:
@@ -13,7 +13,7 @@ services:
             - ${DB_PORT}:5432
     postgres-test:
         image: postgres:14
-        container_name: auth-sequelize-test
+        container_name: auth-test
         env_file:
             - .env
         environment:
