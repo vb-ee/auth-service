@@ -12,8 +12,10 @@ export const authHandler = (tokenType = 'accessToken') => {
                     case 'accessToken':
                     default:
                         jwt = JwtUtils.verifyAccessToken(token)
+                        break
                     case 'refreshToken':
                         jwt = JwtUtils.verifyRefreshToken(token)
+                        break
                 }
                 req.body.jwt = jwt
                 next()

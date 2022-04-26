@@ -13,7 +13,7 @@ router.post(
     asyncWrapper(async (req, res) => {
         const { jwt } = req.body
 
-        const user = await User.finfOne({
+        const user = await User.findOne({
             where: { email: jwt.email },
             include: RefreshToken,
         })
