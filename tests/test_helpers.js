@@ -1,3 +1,4 @@
+import request from 'supertest'
 import { config } from '../src/config'
 import { Database } from '../src/database'
 
@@ -19,5 +20,12 @@ export class TestHelpers {
     static getApp() {
         const App = require('../src/app').default
         return new App().getApp()
+    }
+
+    static async signupNewUser(options) {
+        const { email, password, endpoint = '/signup' } = options
+        return request(TestHelpers.getApp())
+            .post(endpoint)
+            .send({ email, password })
     }
 }
