@@ -29,8 +29,7 @@ router.post(
             if (!savedRefreshToken) {
                 await user.createRefreshToken({ token: refreshToken })
             } else {
-                user.RefreshToken.token = refreshToken
-                await user.RefreshToken.save()
+                await user.setRefreshToken(refreshToken)
             }
         } else {
             refreshToken = savedRefreshToken.token
@@ -39,7 +38,7 @@ router.post(
         return res.status(200).send({
             success: true,
             message: 'User successfully logged in',
-            data: { accessToken, refreshToken }
+            data: { accessToken, refreshToken },
         })
     })
 )
