@@ -1,6 +1,7 @@
 import request from 'supertest'
 import { TestHelpers } from '../test_helpers'
 import { models } from '../../src/models'
+import { JwtUtils } from '../../src/utils'
 
 describe('token', () => {
     let app
@@ -19,7 +20,7 @@ describe('token', () => {
         await TestHelpers.syncDb()
         newUser = await TestHelpers.signupNewUser({
             email: 'test@example.com',
-            password: 'Test123#',
+            password: 'Test123#'
         })
     })
 
@@ -49,6 +50,22 @@ describe('token', () => {
                 .set('Authorization', 'Malformed')
                 .send()
                 .expect(401)
+        })
+    })
+
+    describe('errors middleware', () => {
+        it('should return 500 if something went wrong', async () => {
+            const jwtSpy = jest.spyOn(JwtUtils, 'generateAccessToken')
+            jwtSpy.mockImplementation(() => {
+                throw Error('test error')
+            })
+            const refreshToken = newUser.body.data.refreshToken
+            await request(app)
+                .post('/token')
+                .set('Authorization', `Bearer ${refreshToken}`)
+                .send()
+                .expect(500)
+            jwtSpy.mockRestore()
         })
     })
 
