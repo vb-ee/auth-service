@@ -46,7 +46,7 @@ router.post(
                 data: { accessToken, refreshToken }
             })
         } catch (error) {
-            console.error('Error registering the user: \n', error.stack)
+            console.error('Error signing up the user: \n', error.stack)
             res.status(500).send({ success: false, message: error.message })
         }
     })

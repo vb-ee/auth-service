@@ -13,9 +13,12 @@ router.post(
         const { email } = req.body.jwt
         const user = await User.findOne({
             where: { email },
+            include: RefreshToken
         })
 
-        await user.setRefreshToken(null)
+        user.RefreshToken.token = null
+
+        await user.RefreshToken.save()
 
         return res
             .status(200)
