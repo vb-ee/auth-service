@@ -24,7 +24,8 @@
         "watch:dev": "nodemon",
         "test": "jest --runInBand",
         "test:watch": "npm test -- --watch",
-        "debug": "npm run dev -- --inspect"
+        "debug": "npm run dev -- --inspect",
+        "test:cover": "npm run test -- --coverage"
     },
     "keywords": [],
     "author": "",
