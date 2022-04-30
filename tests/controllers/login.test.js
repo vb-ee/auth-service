@@ -60,4 +60,33 @@ describe('login', () => {
             newUser.body.data.refreshToken
         )
     })
+
+    it('should create a new refresh token record if there is no associated with user', async () => {
+        const { RefreshToken } = models
+        await RefreshToken.destroy({ where: {} })
+        let refreshTokens = await RefreshToken.findAll()
+        expect(refreshTokens.length).toEqual(0)
+        await request(app)
+            .post('/login')
+            .send({ email: 'test@example.com', password: 'Test123#' })
+            .expect(200)
+        refreshTokens = await RefreshToken.findAll()
+        expect(refreshTokens.length).toEqual(1)
+        expect(refreshTokens[0].token).not.toBeNull()
+    })
+
+    it('should assign a new token to refresh token record if it was not already', async () => {
+        const { RefreshToken } = models
+        const savedRefreshToken = await RefreshToken.findOne({
+            where: { token: newUser.body.data.refreshToken },
+        })
+        savedRefreshToken.token = null
+        await savedRefreshToken.save()
+        await request(app)
+            .post('/login')
+            .send({ email: 'test@example.com', password: 'Test123#' })
+            .expect(200)
+        await savedRefreshToken.reload()
+        expect(savedRefreshToken.token).not.toBeNull()
+    })
 })
