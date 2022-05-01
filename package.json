@@ -24,7 +24,6 @@
         "watch:dev": "nodemon",
         "test": "jest --runInBand",
         "test:watch": "npm test -- --watch",
-        "debug": "npm run dev -- --inspect",
         "test:cover": "npm run test -- --coverage"
     },
     "keywords": [],
@@ -54,6 +53,7 @@
         "nodemon": "^2.0.14",
         "npm-run-all": "^4.1.5",
         "rimraf": "^3.0.2",
+        "sequelize-cli": "^6.4.1",
         "supertest": "^6.1.6"
     }
 }

@@ -9,7 +9,7 @@ export const config = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         database: process.env.DB_DATABASE,
-        dialect: 'postgres',
+        dialect: 'postgres'
     },
     test: {
         username: process.env.DB_TEST_USERNAME,
@@ -17,7 +17,15 @@ export const config = {
         host: process.env.DB_TEST_HOST,
         port: process.env.DB_TEST_PORT,
         database: process.env.DB_TEST_DATABASE,
-        dialect: 'postgres',
+        dialect: 'postgres'
+    },
+    production: {
+        username: process.env.DB_PRODUCTION_USERNAME,
+        password: process.env.DB_PRODUCTION_PASSWORD,
+        host: process.env.DB_PRODUCTION_HOST,
+        port: process.env.DB_PRODUCTION_PORT,
+        database: process.env.DB_PRODUCTION_DATABASE,
+        dialect: 'postgres'
     },
     environment: {
         port: process.env.PORT,
@@ -25,6 +33,6 @@ export const config = {
         jwt_auth_token: process.env.JWT_SECRET_AUTH_TOKEN,
         jwt_refresh_token: process.env.JWT_SECRET_REFRESH_TOKEN,
         jwt_expires_in: process.env.JWT_EXPIRES_IN,
-        salt_rounds: process.env.SALT_ROUNDS,
-    },
+        salt_rounds: process.env.SALT_ROUNDS
+    }
 }
