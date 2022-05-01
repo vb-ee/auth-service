@@ -1,6 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
-import { config } from './config/config'
+import * as config from './config'
 import { errorMiddleware } from './middlewares/error_handler'
 import { router } from './controllers'
 

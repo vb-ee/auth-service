@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { config } from '../config/config'
+import * as config from '../config'
 
 const { jwt_auth_token, jwt_refresh_token, jwt_expires_in } = config.environment
 

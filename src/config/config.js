@@ -2,14 +2,14 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export const config = {
+const config = {
     development: {
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         database: process.env.DB_DATABASE,
-        dialect: 'postgres'
+        dialect: process.env.DB_DIALECT
     },
     test: {
         username: process.env.DB_TEST_USERNAME,
@@ -17,15 +17,15 @@ export const config = {
         host: process.env.DB_TEST_HOST,
         port: process.env.DB_TEST_PORT,
         database: process.env.DB_TEST_DATABASE,
-        dialect: 'postgres'
+        dialect: process.env.DB_TEST_DIALECT
     },
     production: {
-        username: process.env.DB_PRODUCTION_USERNAME,
-        password: process.env.DB_PRODUCTION_PASSWORD,
-        host: process.env.DB_PRODUCTION_HOST,
-        port: process.env.DB_PRODUCTION_PORT,
-        database: process.env.DB_PRODUCTION_DATABASE,
-        dialect: 'postgres'
+        username: process.env.DB_PROD_USERNAME,
+        password: process.env.DB_PROD_PASSWORD,
+        host: process.env.DB_PROD_HOST,
+        port: process.env.DB_PROD_PORT,
+        database: process.env.DB_PROD_DATABASE,
+        dialect: process.env.DB_PROD_DIALECT
     },
     environment: {
         port: process.env.PORT,
@@ -36,3 +36,5 @@ export const config = {
         salt_rounds: process.env.SALT_ROUNDS
     }
 }
+
+module.exports = config
