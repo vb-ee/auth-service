@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { config } from '../src/config'
+import * as config from '../src/config'
 import { Database } from '../src/database'
 
 const testDb = new Database('test', config)
