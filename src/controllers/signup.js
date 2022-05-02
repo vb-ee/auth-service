@@ -4,7 +4,7 @@ import { JwtUtils } from '../utils'
 import { asyncWrapper } from '../utils'
 
 const router = Router()
-const { User, Role, sequelize } = models
+const { User, sequelize } = models
 
 router.post(
     '/signup',
@@ -26,12 +26,9 @@ router.post(
             await newUser.createRefreshToken({ token: refreshToken })
 
             if (roles && Array.isArray(roles)) {
-                const rolesToSave = []
                 for (const role of roles) {
-                    const newRole = await Role.create({ role })
-                    rolesToSave.push(newRole)
+                    await newUser.createRole({ role })
                 }
-                await newUser.addRoles(rolesToSave)
             }
 
             return { accessToken, refreshToken }
@@ -42,7 +39,7 @@ router.post(
         return res.send({
             success: true,
             message: 'User successfully created',
-            data: { accessToken, refreshToken },
+            data: { accessToken, refreshToken }
         })
     })
 )

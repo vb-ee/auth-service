@@ -29,7 +29,7 @@ export const getUser = (sequelize) => {
                 type: DataTypes.STRING,
                 unique: true
             },
-            firstName: {
+            firstname: {
                 type: DataTypes.STRING,
                 validate: {
                     len: {
@@ -38,7 +38,7 @@ export const getUser = (sequelize) => {
                     }
                 }
             },
-            lastName: {
+            lastname: {
                 type: DataTypes.STRING,
                 validate: {
                     len: {
