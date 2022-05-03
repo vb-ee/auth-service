@@ -39,7 +39,7 @@ You can also view the test coverage by running:
 ### `npm run test:cover`
 
 It creates the coverage directory with `index.html` file within your project directory.\
-You can view the test statistics by opening `index.hmtl` file inside your browser.\
+You can view the test statistics by opening `index.hmtl` file inside your browser
 
 To debug the code run:
 
