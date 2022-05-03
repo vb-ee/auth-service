@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "commonjs",
     "nodemonConfig": {
-        "exec": "npm run dev",
+        "exec": "npm run",
         "watch": [
             "src/*"
         ],
@@ -16,14 +16,16 @@
         ]
     },
     "scripts": {
-        "server": "node dist-src/server.js",
-        "transpile": "babel src --out-dir dist-src",
-        "clean": "rimraf dist-server",
+        "server": "node dist/server.js",
+        "transpile": "babel src --out-dir dist",
+        "clean": "rimraf dist",
         "build": "npm-run-all clean transpile",
         "dev": "NODE_ENV=development npm-run-all build server",
-        "watch:dev": "nodemon",
+        "watch:dev": "nodemon dev",
+        "inspect": "node --inspect dist/server.js",
+        "debug": "nodemon build inspect",
         "test": "jest --runInBand",
-        "test:watch": "npm test -- --watch",
+        "test:watch": "npm run test -- --watch",
         "test:cover": "npm run test -- --coverage"
     },
     "keywords": [],
