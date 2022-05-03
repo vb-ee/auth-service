@@ -1,11 +1,37 @@
 import { DataTypes, Model } from 'sequelize'
-import { hashPassword } from '../utils'
+import { hashPassword, JwtUtils } from '../utils'
 
 export const getUser = (sequelize) => {
     class User extends Model {
         static associate(models) {
             User.hasMany(models['Role'])
             User.hasOne(models['RefreshToken'])
+        }
+
+        static async createUser(userAttributes) {
+            return sequelize.transaction(async () => {
+                const {
+                    email,
+                    password,
+                    username,
+                    firstname,
+                    lastname,
+                    roles
+                } = userAttributes
+                const newUser = await User.create({ email, password })
+                const jwtPayload = { email }
+                const accessToken = JwtUtils.generateAccessToken(jwtPayload)
+                const refreshToken = JwtUtils.generateRefreshToken(jwtPayload)
+                await newUser.createRefreshToken({ token: refreshToken })
+
+                if (roles && Array.isArray(roles)) {
+                    for (const role of roles) {
+                        await newUser.createRole({ role })
+                    }
+                }
+
+                return { accessToken, refreshToken }
+            })
         }
     }
 
