@@ -12,8 +12,8 @@ Considering environment variables defined and docker pre-installed run:
 
 ### `docker-compose up -d`
 
-Starts the databases using environment variables defined in .env file
-Check if the name of env variables matches the ones defined in docker-compose.yaml file
+Starts the databases using environment variables defined in .env file.\
+Check if the name of env variables matches the ones defined in docker-compose.yaml file.\
 `d` flag is optional as it runs the command in detached mode
 
 ## Available Scripts
@@ -38,14 +38,14 @@ You can also view the test coverage by running:
 
 ### `npm run test:cover`
 
-It creates the coverage directory with `index.html` file within your project directory
-You can view the test statistics by opening `index.hmtl` file inside your browser
+It creates the coverage directory with `index.html` file within your project directory.\
+You can view the test statistics by opening `index.hmtl` file inside your browser.\
 
 To debug the code run:
 
 ### `npm run debug`
 
-It opens the debugger in your browsers's inspection window
+It opens the debugger in your browsers's inspection window.\
 You can easily debug the code by inserting `debugger` into the place you want to inspect
 
 ## Other Scripts
