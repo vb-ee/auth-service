@@ -1,5 +1,5 @@
 {
-    "name": "sequelize-practice",
+    "name": "auth-service",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -20,12 +20,12 @@
         "transpile": "babel src --out-dir dist",
         "clean": "rimraf dist",
         "build": "npm-run-all clean transpile",
-        "dev": "NODE_ENV=development npm-run-all build server",
-        "watch:dev": "nodemon dev",
+        "start": "npm-run-all build server",
+        "watch:start": "nodemon start",
         "inspect": "node --inspect dist/server.js",
         "debug": "nodemon build inspect",
         "test": "jest --runInBand",
-        "test:watch": "npm run test -- --watch",
+        "watch:test": "npm run test -- --watch",
         "test:cover": "npm run test -- --coverage"
     },
     "keywords": [],
