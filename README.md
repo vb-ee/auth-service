@@ -16,6 +16,10 @@ Starts the databases using environment variables defined in .env file.\
 Check if the name of env variables matches the ones defined in docker-compose.yaml file.\
 `d` flag is optional as it runs the command in detached mode
 
+To migrate the models into database run:
+
+### `npx sequelize-cli db:migrate`
+
 ## Available Scripts
 
 To start the service run:
@@ -52,14 +56,14 @@ You can easily debug the code by inserting `debugger` into the place you want to
 
 To create the transpiled dist directory run:
 
-## `npm run transpile`
+### `npm run transpile`
 
 It creates the dist folder with commonjs syntax from your source code written in es6 syntax
 
 To remove the dist folder:
 
-## `npm run clean`
+### `npm run clean`
 
 Joins above two commands into one:
 
-## `npm run build`
+### `npm run build`
