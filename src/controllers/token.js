@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { authHandler } from '../middlewares/auth_handler'
 import { models } from '../models'
-import { comparePasswords, JwtUtils } from '../utils'
+import { JwtUtils } from '../utils'
 import { asyncWrapper } from '../utils'
 
 const router = Router()
@@ -15,7 +15,7 @@ router.post(
 
         const user = await User.findOne({
             where: { email: jwt.email },
-            include: RefreshToken,
+            include: RefreshToken
         })
 
         const savedRefreshToken = user.RefreshToken
@@ -27,12 +27,12 @@ router.post(
         }
 
         const newAccessToken = JwtUtils.generateAccessToken({
-            email: user.email,
+            email: user.email
         })
 
         return res.status(200).send({
             success: true,
-            data: { accessToken: newAccessToken },
+            data: { accessToken: newAccessToken }
         })
     })
 )
